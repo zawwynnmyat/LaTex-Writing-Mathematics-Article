@@ -1,0 +1,279 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{fancyhdr, lastpage}
+
+\pagestyle{fancy}
+\lhead{Ramanujan's master theorem}
+\rhead{Practising LaTex by Zaw Myat}
+\cfoot{Page \thepage\ of \pageref{LastPage}}
+
+\title{Practising LaTex to present Ramanujan's Master Theorem}
+\author{Zaw Myat}
+\date{November 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+In mathematics, Ramanujan's Master Theorem, named after Srinivasa Ramanujan \cite{ramanujan_notebook}, is a technique that provides an analytic expression for the Mellin transform of an analytic function.
+
+$$
+f(x) = \sum_{k=0}^\infty \frac{\varphi(k)}{k!} (-x)^k
+$$
+
+then the Mellin transform of $f(x)$ is given by
+
+$$
+ \int_0^\infty x^{s-1}f(x)dx = \Gamma(s) \varphi(-s)
+$$
+
+where $\gamma(s)$  is the gamma function.
+
+It was widely used by Ramanujan to calculate definite integrals and infinite series.
+
+Higher-dimensional versions of this theorem also appear in quantum physics (through Feynman diagrams).\cite{citation2}
+
+A similar result was also obtained by Glaisher \cite{glaisher_jwl}.
+
+\section{Alternative formalism}
+
+An alternative formulation of Ramanujan's Master Theorem is as follows:
+
+$$
+ \int_0^\infty x^{s-1} \left(\lambda(0) - x\lambda(1)+x^2 \lambda(2)-\cdots\right)dx  = \frac{\pi}{\sin(\pi s) }\lambda(-s)
+$$
+
+which gets converted to the above from after substituting $\lambda(n) \equiv \frac{\varphi (n)}{\gamma (1+n)}$ and using the function equation for the gamma function.
+
+The integral above is convergent for $0 < \mathcal{R} e (s) < 1$ subject to growth conditions on ${\varphi}. \cite{ramanujan_journal}$
+
+\section{Proof}
+A proof subject to "natural" assumptions (though not the weakest necessary conditions) to Ramanujan's Master theorem was provided by G. H. Hardy\cite{hardy} (chapter XI) employing the residue theorem and the well-known Mellin inversion theorem.
+
+\section{Application to Bernoulli polynomials}
+
+The generating function of the Bernoulli polynomials $B_k(x)$ is given by:
+
+$$
+\frac{z e^{xz}}{e^z - 1} = \sum_{k=0}^\infty B_k (x) \frac{z^k}{k!}
+$$
+
+These polynomials are given in terms of the Hurwitz zeta function:
+
+$$
+\zeta(s,a) = \sum_{n=0}^\infty \frac{1}{(n+a)^s}
+$$
+
+by $\zeta(1-n,a) = - \frac{B_n (a)}{n}$ for $n \geq 1$. Using the Ramanujan master theorem and the generating function of Bernoulli polynomials one has the following integral representation.\cite{ramanujan_journal2}
+
+$$
+\int_0^\infty x^{s-1} \left(\frac{e^{-ax}}{1 - e^{-x}} - \frac{1}{x} \right) dx = \gamma (s) \zeta(s,a)
+$$
+
+which is valid for $0 < \mathcal{R} e (s) < 1$.
+
+\section{Application to the gamma function}
+
+Weiserstrass's definition of the gamma function
+
+$$
+\Gamma(x) = \frac{e^{-\gamma x}}{x} \prod_{n=1}^\infty \left(1+\frac{x}{n}\right)^{-1} e^{\frac{x}{n}}
+$$
+
+is equivalent to expression
+
+$$
+log\Gamma(1+x) = -\gamma x + \sum_{k=2}^\infty \frac{\zeta(k)}{k} (-x)^k
+$$
+
+where $\zeta(k)$ is the Riemann zeta function.
+
+Then applying Ramanujan master theorem we have:
+
+$$
+\int_0^\infty x^{s-1} \frac{\gamma x + log\Gamma(1 + x)}{x^2} dx = \frac{\pi}{\sin(\pi s)} \frac{\zeta(2-s)}{2-s}
+$$
+
+valid for  $0 < \mathcal{R} e (s) < 1$.
+
+Special cased of $s=\frac{1}{2}$ and $s=\frac{3}{4}$ are
+
+$$
+\int_0^\infty \frac{\gamma x + log\Gamma (1+x)}{x^\frac{5}{2}} dx = \frac{2\pi}{3}\zeta\left(\frac{3}{2}\right)
+$$
+
+$$
+\int_0^\infty \frac{\gamma x + log\Gamma(1+x)}{x^\frac{9}{4}} dx = \sqrt{2}\frac{4\pi}{5}\zeta\left(\frac{5}{4}\right)
+$$
+
+\section{Application to Bessel functions}
+
+The Bessel function of the first kind has the power series
+
+$$
+J_v(z) = \sum_{k=0}^\infty \frac{(-1)^k}{\Gamma (k+v+1)k!} \left(\frac{z}{2}\right)^{2k+v}
+$$
+
+By Ramanujan's Master Theorem, together with some identities for the gamma function and rearranging, we can evaluate the integral
+
+$$
+\frac{2^{v-2s} \pi}{\sin(\pi(s-v))} \int_0^\infty z^{s-1-\frac{v}{2}} J_v(\sqrt{z})dz = \Gamma(s)\Gamma(s-v)
+$$
+
+valid for $0 < 2 \mathcal{R}(s) < \mathcal{R}(v) + \frac{3}{2}$.
+
+Equivalently, if the spherical Bessel function $j_v(z)$ is preferred, the formula becomes
+
+$$
+\frac{2^{v-2s}\sqrt{\pi}(1-2s+2v)}{cos(\pi(s-v))} \int_0^\infty z^{s-1-\frac{v}{2}} j_v(\sqrt{z})dz = \Gamma(s)\Gamma\left(\frac{1}{2} + s - v\right)
+$$
+
+valid for $0 < 2 \mathcal{R}e(s) < \mathcal{R}e(v) + 2$.
+
+The solution is remarkable in that it is able to interpolate across the major identities for the gamma function. In particular, the choice of $J_0(\sqrt{z})$ gives the square of the gamma function, $j_0(\sqrt{z})$ gives the duplication formula, $z^{\frac{-1}{2}} J_  1(\sqrt{z})$ gives the reflection formula, and fixing to the evaluable $s = \frac{1}{2}$ or $s=1$ gives the gamma function by itself, up to reflection and scaling.
+
+\section{Bracket integration method}
+The bracket integration method (method of brackets) applies Ramanujan's Master Theorem to a broad range of integrals. The bracket integration method generates an integral of a series expansion, introduces simplifying notations, solves linear equations, and completes the integration using formulas arising from Ramanujan's Master Theorem.\cite{open_maths}
+
+\subsection{Generate an integral of a series expansion}
+This method transforms the integral to an integral of a series expansion involving M variables, $x_1,\cdots x_M,$ and S summation parameters, $n_1,\cdots n_S$. A multivariate integral may assume this form.\cite{citation2}
+
+\begin{equation}
+\label{eq1}
+\int_0^\infty \cdots \int_0^\infty \sum_{n_1,\cdots , n_s = 0}^\infty \varphi(n_1 \cdots n_S) \prod_{j=1}^S \left(\frac{(-1)^n_j}{n_j !}\right) \prod_{j=1}^M (x_j)^{(-c_j+a_{j1} . n_1+\cdots+a_{jS}.n_S-1)} 
+%\\ dx_1 \cdots dx_M
+\end{equation}
+
+
+\subsection{Apply special notations}
+\begin{itemize}
+    \item The bracket ($\langle \cdots \rangle$), indicator ($\phi$), and monomial power notations replace terms in the series expansion.\cite{citation2}
+
+    \begin{equation}
+    \label{eq2}
+        \int_0^\infty x^{c+bn-1} dx \rightarrow <c+b \cdot n>
+    \end{equation}
+
+    \begin{equation}
+    \label{eq3}
+       \frac{(-1)^n}{n!} \rightarrow \phi_n
+    \end{equation}
+
+    \begin{equation}
+    \label{eq4}
+        \prod_{j=1}^S \left(\frac{(-1)^n_j}{n_j !}\right)\rightarrow \phi_n1,\cdots,n_s
+    \end{equation}
+
+    \begin{equation}
+    \label{eq5}
+        \left(\sum_{k=1}^P u_k\right)^{\mp d} \rightarrow \sum_{n_1,\cdots,n_p=0}^\infty\varphi_{n_1,\cdots,n_P}\prod_{k=1}^P u_k^{n_k}\frac{\langle\pm d + \sum_{j=1}^P n_j\rangle}{\Gamma(\pm d)}
+    \end{equation}
+ 
+    \item  Application of these notations transforms the integral to a bracket series containing B brackets.\cite{adv_applied_maths}
+
+    \begin{equation}
+    \label{eq6}
+    \sum_{n_1,\cdots,n_s=0}^\infty \varphi(n_1\cdots n_s)\phi(n_1 \cdots n_s)\prod_{j=1}^B\left\langle -c_j + \sum_{k=1}^S a_{jk}\cdot n_k \right\rangle
+    \end{equation}
+ 
+    \item Each bracket series has an index defined as index = number of sums - number of brackets.
+    
+    \item Among all bracket series representations of an integral, the representation with a minimal index is preferred.
+    
+\end{itemize}
+
+\section{Solve linear equations}
+\begin{itemize}
+    \item The array of coefficients $a_{jk}$ must have maximum rank, linearly independent leading columns to solve the following set of linear equations.
+
+    \item If the index is non-negative, solve this equation set for each $n_j^\star$. The terms $n_j^\star$ may be linear functions of ${n_{B+1}\cdots n_S}$.
+
+    \begin{equation}
+    \label{eq7}
+    -c_j + \sum_{k=1}^B a_{jk} \cdot n_k^\star + \sum_{k=B+1}^S a_{jk}\cdot n_k = 0
+    \end{equation}
+
+    \item If the index is zero, equation \ref{eq7} simplifies to solving this equation set for each $n_j^\star$
+
+    \begin{equation}
+    \label{eq8}
+    -c_j + \sum_{k=1}^B a_{jk}\cdot n_k^\star = 0
+    \end{equation}
+
+    \item If the index is negative, the integral cannot be determined.
+\end{itemize}
+
+\section{Apply formulas}
+\begin{itemize}
+    \item If the index is non-negative, the formula for the integral is this form.\cite{adv_applied_maths}
+    \begin{equation}
+    \label{eq9}
+        \sum_{n_{B+1}\cdots n_S = 0}^\infty\frac{\varphi(\varphi_1^\star\cdots n_B^\star,n_{B+1}\cdots n_S)\cdot\prod_{j-1}^B\Gamma(-n_j^\star)}{det\vert A \vert}
+    \end{equation}
+
+    \item These rules apply.\cite{open_maths}
+    \begin{itemize}
+        \item A series is generated for each choice of free summation parameters, $\{n_B + 1, \cdots Ns\}$
+        \item Series converging in a common region are added.
+        \item If a choice generates a divergent series or null series (a series with zero valued terms), the series is rejected.
+        \item A bracket series of negative index is assigned no value.
+        \item If all series are rejected, then the method cannot be applied.
+        \item If the index is zero, the formula \ref{eq9} simplifies to this formula and no sum occurs.
+
+        \begin{equation}
+        \label{eq10}
+        \frac{\varphi(n_1^\star\cdots n_S^\star)\cdot\prod_{j=1}^S \Gamma (-n_j^\star))}{det \vert A \vert}
+        \end{equation}
+    \end{itemize}
+\end{itemize}
+
+\section{Mathematical basis}
+\begin{itemize}
+    \item Apply this variable transformation to the general integral form equation \ref{eq1}\cite{ramanujan_journal}
+    \begin{equation}
+    \label{eq11}
+    y_k = x_1^{a_{1k}} . \cdots . x_M^{a_{Mk}}
+    \end{equation}
+
+    \item This is the transformed integral (\ref{eq12}) and the result from applying Ramanujan's Master Theorem (\ref{eq13}).
+    
+    \begin{equation}
+    \label{eq12}
+        (det\vert A \vert^{-1})\cdot\int_0^\infty\cdots\int_0^\infty\sum_{n_1,\cdots,n_S=0}^\infty\varphi(n_1\cdots n_S)\prod_{j=1}^S\left(\frac{(-1)^{n_j}}{n_j !}\right)\prod_{j=1}^M(y_j)^{-n_j^\star+n_j-1}dy_1\cdots dy_M
+    \end{equation}
+
+    \begin{equation}
+    \label{eq13}
+        =\sum_{n_{M+1}\cdots n_S = 0}^\infty \frac{\varphi(n_1^\star\cdots n_M^\star,n_{M+1}\cdots n_s) \cdot \prod_{j=1}^M\Gamma(-n_j^\star)}{det\vert A \vert}
+    \end{equation}
+
+    \item The number of brackets (B) equals the number of integrals (M) \ref{eq2}. In addition to generating the algorithm's formulas (\ref{eq9}, \ref{eq10}), the variable transformation also generates the algorithm's linear equations (\ref{eq7},\ref{eq8}).\cite{adv_applied_maths}
+    
+\end{itemize}
+
+\section{Example}
+\begin{itemize}
+    \item The bracket integration method is applied to this integral.
+    $$\int_0^\infty x^{\frac{3}{2}}\cdot e^{\frac{-x^3}{2}}dx$$
+    \item Generate the integral of a series expansion (\ref{eq1})
+    $$\int_0^\infty\sum_{n=0}^\infty 2^{-n}\cdot \frac{(-1)^n}{n!}\cdot x^{(3\cdot n + \frac{5}{2})-1} dx$$
+    \item Apply special notations (equation \ref{eq2}, \ref{eq3}).
+    $$\sum_{n=0}^\infty 2^{-n}\cdot \phi(n)\cdot\langle 3\cdot n + \frac{5}{2}\rangle$$
+    \item Solve the linear equation (equation \ref{eq8}).
+    $$3\cdot n^\star + \frac{5}{2} = 0, n^\star = \frac{-5}{6}$$
+    \item Apply the formula (equation \ref{eq9})
+    $$\frac{2^{\frac{5}{6}} \cdot \Gamma (\frac{5}{6})}{3}$$
+\end{itemize}
+
+%$$
+%\Gamma(x) = \frac{e^{\gamma x}}{x} \prod_{n=1}^\infty %\left(1+\frac{x}{n}\right)^{-1} e^{\frac{x}{n}}
+%$$
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}
